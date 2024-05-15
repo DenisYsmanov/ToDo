@@ -2,23 +2,71 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        .task {
+            display: flex;
+            align-items: center;
+        }
+        .task-title {
+            flex: 1;
+        }
+        .status {
+            margin-left: 10px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .completed {
+            background-color: #66bb6a;
+            color: white;
+        }
+        .not-completed {
+            background-color: #ef5350;
+            color: white;
+        }
+        .action-link {
+            margin-left: 10px;
+            text-decoration: none;
+            color: #2196f3;
+        }
+    </style>
 </head>
 <body>
     <h1>Todo List</h1>
     <ul>
         {% for task in todo %}
             <li>
-                {{ task.title }} - {{ task.text }}
-                {% if task.is_complete %}
-                    <span>(Выполнено)</span>
-                {% else %}
-                    <span>(Не выполнено)</span>
-                {% endif %}
-                <a href="{% url 'done_task' task.id %}">(Изменить статус)</a>
+                <div class="task">
+                    <div class="task-title">{{ task.title }} - {{ task.text }}</div>
+                    <div class="status {% if task.is_complete %}completed{% else %}not-completed{% endif %}">
+                        {% if task.is_complete %}
+                            Выполнено
+                        {% else %}
+                            Не выполнено
+                        {% endif %}
+                    </div>
+                    <a href="{% url 'done_task' task.id %}" class="action-link">Изменить статус</a>
+                </div>
             </li>
         {% endfor %}
     </ul>
-    <a href="{% url 'create' %}">Create new task</a>
+    <a href="{% url 'create' %}" class="action-link">Создать новую задачу</a>
 </body>
 </html>

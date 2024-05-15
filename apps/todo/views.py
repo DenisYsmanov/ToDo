@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from apps.todo.models import Todo
 
@@ -23,23 +23,23 @@ def retrieve(request,pk):
 
 
 def update(request, pk):
+    todo = Todo.objects.get(id=pk)
     if request.method == "POST":
-        name = request.POST['title']
-        description = request.POST['text']
-        todo = Todo.objects.get(id=pk)
+        name = request.POST.get('title')
+        description = request.POST.get('text')
         todo.title = name
         todo.text = description
         todo.save()
-        return redirect('detail', todo.id)
-    return render(request, 'update.html', locals())
+        return redirect('detail', pk=pk)
+    return render(request, 'update.html', {'todo': todo})
 
 
 def destroy(request, pk):
+    todo = get_object_or_404(Todo, id=pk)
     if request.method == 'POST':
-        todos = Todo.objects.get(id=pk)
-        todos.delete()
+        todo.delete()
         return redirect('homepage')
-    return render (request, 'destroy.html', locals())
+    return render(request, 'destroy.html', locals())
 
 
 def done_task(request, pk):

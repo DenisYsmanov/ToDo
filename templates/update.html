@@ -1,18 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Редактировать задание</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Todo</title>
 </head>
 <body>
-    <h1>Редактировать задание</h1>
-    <form method="post" action="{% url 'update' todo.id %}">
+    <h1>Update Todo</h1>
+    <form method="post">
         {% csrf_token %}
-        <label for="title">Название:</label>
+        <label for="title">Title:</label><br>
         <input type="text" id="title" name="title" value="{{ todo.title }}"><br>
-        <label for="text">Описание:</label>
+        <label for="text">Description:</label><br>
         <textarea id="text" name="text">{{ todo.text }}</textarea><br>
-        <button type="submit">Сохранить изменения</button>
+        <button type="submit">Save Changes</button>
     </form>
-    <a href="{% url 'detail' todo.id %}">Назад к деталям задания</a>
+    <a href="{% url 'detail' todo.id %}">Back to Todo Details</a>
 </body>
 </html>
