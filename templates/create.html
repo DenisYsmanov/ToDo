@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Создать задание</title>
+</head>
+<body>
+    <h1>Создать задание</h1>
+    <form method="post" action="{% url 'create' %}">
+        {% csrf_token %}
+        <label for="title">Название:</label>
+        <input type="text" id="title" name="title"><br>
+        <label for="description">Описание:</label>
+        <textarea id="description" name="description"></textarea><br>
+        <button type="submit">Создать</button>
+    </form>
+</body>
+</html>

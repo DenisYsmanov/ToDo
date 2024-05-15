@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo List</title>
+</head>
+<body>
+    <h1>Todo List</h1>
+    <ul>
+        {% for task in todo %}
+            <li>
+                {{ task.title }} - {{ task.text }}
+                {% if task.is_complete %}
+                    <span>(Выполнено)</span>
+                {% else %}
+                    <span>(Не выполнено)</span>
+                {% endif %}
+                <a href="{% url 'done_task' task.id %}">(Изменить статус)</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'create' %}">Create new task</a>
+</body>
+</html>

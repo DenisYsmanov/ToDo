@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Редактировать задание</title>
+</head>
+<body>
+    <h1>Редактировать задание</h1>
+    <form method="post" action="{% url 'update' todo.id %}">
+        {% csrf_token %}
+        <label for="title">Название:</label>
+        <input type="text" id="title" name="title" value="{{ todo.title }}"><br>
+        <label for="text">Описание:</label>
+        <textarea id="text" name="text">{{ todo.text }}</textarea><br>
+        <button type="submit">Сохранить изменения</button>
+    </form>
+    <a href="{% url 'detail' todo.id %}">Назад к деталям задания</a>
+</body>
+</html>

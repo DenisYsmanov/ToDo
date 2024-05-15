@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Детали задания</title>
+</head>
+<body>
+    <h1>{{ todo.title }}</h1>
+    <p>{{ todo.text }}</p>
+    <p>Создано: {{ todo.created_at }}</p>
+    <p>
+        {% if todo.completed %}
+            Статус: Выполнено
+        {% else %}
+            Статус: Не выполнено
+        {% endif %}
+    </p>
+    <a href="{% url 'update' todo.id %}">Редактировать</a>
+    <a href="{% url 'destroy' todo.id %}">Удалить</a>
+    <a href="{% url 'done_task' todo.id %}">Переключить статус выполнения</a>
+    <a href="{% url 'homepage' %}">Назад к списку заданий</a>
+</body>
+</html>

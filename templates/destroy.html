@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Удалить задание</title>
+</head>
+<body>
+    <h1>Вы уверены, что хотите удалить задание "{{ todo.title }}"?</h1>
+    <form method="post" action="{% url 'destroy' todo.id %}">
+        {% csrf_token %}
+        <button type="submit">Удалить</button>
+    </form>
+    <a href="{% url 'detail' todo.id %}">Отмена</a>
+</body>
+</html>
